@@ -4,6 +4,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -16,21 +18,25 @@ class MainActivity2 : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main2)
 
-        val button=findViewById<Button>(R.id.cearma)
-        val button1=findViewById<Button>(R.id.Broser)
+        val webR = findViewById<WebView>(R.id.webraj)
 
-        button.setOnClickListener {
+        webViewSetup(webR)
+        webR.loadUrl("https://www.codeconvert.ai/")
 
-            val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE) // Camera kholne ka action
-            startActivity(cameraIntent) // Camera app ko launch karte hain
-        }
-button1.setOnClickListener {
-
-    val intent=Intent(Intent.ACTION_VIEW)
-    intent.data= Uri.parse("https://github.com/raj-9693")
-    startActivity(intent)
-}
-
+//        val button=findViewById<Button>(R.id.cearma)
+//        val button1=findViewById<Button>(R.id.Broser)
+//
+//        button.setOnClickListener {
+//
+//            val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE) // Camera kholne ka action
+//            startActivity(cameraIntent) // Camera app ko launch karte hain
+//        }
+//button1.setOnClickListener {
+//
+//    val intent=Intent(Intent.ACTION_VIEW)
+//    intent.data= Uri.parse("https://github.com/raj-9693")
+//    startActivity(intent)
+//}
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -39,4 +45,18 @@ button1.setOnClickListener {
             insets
         }
     }
-}
+    private fun webViewSetup(webView: WebView) {
+        // WebViewClient सेट करें ताकि URL WebView के अंदर ही खुले
+        webView.webViewClient = WebViewClient()
+
+        // WebView की सेटिंग्स को कस्टमाइज़ करें
+        webView.apply {
+            settings.javaScriptEnabled = true // JavaScript सपोर्ट चालू करें
+            settings.domStorageEnabled = true // DOM Storage सक्षम करें
+            settings.useWideViewPort = true // Content को स्क्रीन के हिसाब से सेट करें
+            settings.loadWithOverviewMode = true  // Zoom आउट व्यू सक्षम करें
+
+        }
+    }
+    }
+

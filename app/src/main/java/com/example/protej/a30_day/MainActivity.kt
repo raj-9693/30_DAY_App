@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
+import com.example.protej.a30_day.FragmentHomeScreen4.FragmentUtils
+import com.example.protej.a30_day.FragmentHomeScreen4.FragmentUtils.Companion.loadFragment
 import com.example.protej.a30_day.FragmentHomeScreen4.firstFragment1
 import com.example.protej.a30_day.FragmentHomeScreen4.fourFragment4
 import com.example.protej.a30_day.FragmentHomeScreen4.secondFragment2
@@ -23,27 +25,34 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        val button=findViewById<Button>(R.id.button1)
+        val button = findViewById<Button>(R.id.button1)
         button.setOnClickListener {
-           val intent= Intent(this,MainActivity2::class.java)
+            val intent = Intent(this, MainActivity2::class.java)
             startActivity(intent)
 
         }
 
-val bottemnavegation=findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        val bottemnavegation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
 
-loadFragment(fourFragment4())
+        loadFragment(this, firstFragment1(), R.id.fragment_container)
+
         bottemnavegation.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.nav_rj ->loadFragment(fourFragment4())
-                    R.id.nav_search
-                ->loadFragment(firstFragment1())
-                    R.id.nav_profile
+                R.id.nav_rj -> loadFragment(this, secondFragment2(), R.id.fragment_container
+                )
 
-                ->loadFragment(threedFragment3())
-                    R.id.nav_home
 
-                ->loadFragment(secondFragment2())
+                R.id.nav_search
+                -> loadFragment(this, firstFragment1(), R.id.fragment_container)
+
+                R.id.nav_profile
+
+                -> FragmentUtils.loadFragment(this, threedFragment3(), R.id.fragment_container)
+
+                R.id.nav_home
+
+                -> FragmentUtils.loadFragment(this, fourFragment4(), R.id.fragment_container)
+
                 else -> false
 
             }
@@ -53,11 +62,5 @@ loadFragment(fourFragment4())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-    }
-    private fun loadFragment(fragment:Fragment):Boolean{
-supportFragmentManager.beginTransaction()
-    .replace(R.id.fragment_container,fragment)
-    .commit()
-  return true
     }
 }
