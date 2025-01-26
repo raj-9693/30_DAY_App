@@ -15,6 +15,12 @@
         android:theme="@style/Theme._30_Day"
         tools:targetApi="31">
         <activity
+            android:name=".four_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".FragmentHomeScreen4.threed_Activiyt"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity2"
             android:exported="false" />
         <activity

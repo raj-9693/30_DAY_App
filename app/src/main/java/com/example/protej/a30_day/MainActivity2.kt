@@ -9,8 +9,18 @@ import android.webkit.WebViewClient
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.whenCreated
+import com.example.protej.a30_day.FragmentHomeScreen4.FragmentUtils
+import com.example.protej.a30_day.FragmentHomeScreen4.FragmentUtils.Companion.loadFragment
+import com.example.protej.a30_day.FragmentHomeScreen4.firstFragment1
+import com.example.protej.a30_day.Fragment_Button1.car_Fragment
+import com.example.protej.a30_day.Fragment_Button1.homeFragment
+import com.example.protej.a30_day.Fragment_Button1.play_Fragment
+import com.example.protej.a30_day.Fragment_Button1.rj_Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,10 +28,38 @@ class MainActivity2 : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main2)
 
-        val webR = findViewById<WebView>(R.id.webraj)
+        val bottomNavigation=findViewById<BottomNavigationView>(R.id.bottom_navigation)
 
-        webViewSetup(webR)
-        webR.loadUrl("https://www.codeconvert.ai/")
+
+        loadFragment(this, car_Fragment(), R.id.fragment_container)
+
+        bottomNavigation.setOnItemSelectedListener { item->
+
+
+            when(item.itemId){
+                R.id. nav_rj->FragmentUtils.loadFragment(this, car_Fragment(),R.id.fragment_container)
+                R.id.nav_home->FragmentUtils.loadFragment(this, homeFragment(),R.id.fragment_container)
+                R.id.nav_profile->FragmentUtils.loadFragment(this,play_Fragment(),R.id.fragment_container)
+                R.id.nav_search->FragmentUtils.loadFragment(this,rj_Fragment(),R.id.fragment_container)
+                else->false
+            }
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+//        val webR = findViewById<WebView>(R.id.webraj)
+//
+//        webViewSetup(webR)
+//        webR.loadUrl("https://www.codeconvert.ai/")
 
 //        val button=findViewById<Button>(R.id.cearma)
 //        val button1=findViewById<Button>(R.id.Broser)
@@ -37,6 +75,8 @@ class MainActivity2 : AppCompatActivity() {
 //    intent.data= Uri.parse("https://github.com/raj-9693")
 //    startActivity(intent)
 //}
+        window.statusBarColor = ContextCompat.getColor(this, R.color.bottom_nav_colors)
+        window.navigationBarColor = ContextCompat.getColor(this, R.color.white)
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -45,18 +85,7 @@ class MainActivity2 : AppCompatActivity() {
             insets
         }
     }
-    private fun webViewSetup(webView: WebView) {
-        // WebViewClient सेट करें ताकि URL WebView के अंदर ही खुले
-        webView.webViewClient = WebViewClient()
 
-        // WebView की सेटिंग्स को कस्टमाइज़ करें
-        webView.apply {
-            settings.javaScriptEnabled = true // JavaScript सपोर्ट चालू करें
-            settings.domStorageEnabled = true // DOM Storage सक्षम करें
-            settings.useWideViewPort = true // Content को स्क्रीन के हिसाब से सेट करें
-            settings.loadWithOverviewMode = true  // Zoom आउट व्यू सक्षम करें
+    }
 
-        }
-    }
-    }
 

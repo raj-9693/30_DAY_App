@@ -14,6 +14,7 @@ import com.example.protej.a30_day.FragmentHomeScreen4.firstFragment1
 import com.example.protej.a30_day.FragmentHomeScreen4.fourFragment4
 import com.example.protej.a30_day.FragmentHomeScreen4.secondFragment2
 import com.example.protej.a30_day.FragmentHomeScreen4.threedFragment3
+import com.example.protej.a30_day.FragmentHomeScreen4.threed_Activiyt
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.delay
 
@@ -31,15 +32,22 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
 
         }
+val button2=findViewById<Button>(R.id.buton2)
 
+        button2.setOnClickListener {
+
+val intent=Intent(this,threed_Activiyt::class.java)
+            startActivity(intent)
+
+
+        }
         val bottemnavegation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
 
         loadFragment(this, firstFragment1(), R.id.fragment_container)
 
         bottemnavegation.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.nav_rj -> loadFragment(this, secondFragment2(), R.id.fragment_container
-                )
+                R.id.nav_rj -> loadFragment(this, secondFragment2(), R.id.fragment_container)
 
 
                 R.id.nav_search
@@ -63,4 +71,5 @@ class MainActivity : AppCompatActivity() {
             insets
         }
     }
+
 }
